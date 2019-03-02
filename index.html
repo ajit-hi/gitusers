@@ -71,10 +71,20 @@
         .info{
             width:200px;margin:auto
         }
-        @media only screen and (max-width : 400px){
+        .img{
+            margin:auto;
+        }
+        .username{
+            text-align: center;
+        }
+        @media only screen and (max-width : 768px){
             .info{
                 width:100%;
             }
+            .img{
+                margin:0;
+            }
+            .username{text-align: left}
         }
     </style>
        
@@ -105,8 +115,8 @@
         <div class= "container-fluid">
             <div class= "row">
                 <div class="col-md-3">
-                    <div style="text-align: center;padding-top:10px;">
-                        <img src="GitHub-Mark.png" style="height: 200px;width:200px;margin:auto" class="card" id="image">
+                    <div style="padding-top:10px;" class="username">
+                        <img src="GitHub-Mark.png" style="height: 200px;width:200px;" class="card img" id="image">
                     <span id="login">GitHub-Mark</span>
                 </div>
                 </div>
