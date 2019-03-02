@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Profile</title>
+        <meta name = "viewport" content = "width=device-width , initial-scale= 1.0">
+        <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+        <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+        <style>
+        </style>
+        <script>
+            function showInfo(){
+                usersname = document.getElementById('username').value;
+                url = 'https://api.github.com/users/'+usersname;
+                xhttp = new XMLHttpRequest();
+                xhttp.onreadystatechange = function(){
+                    if(this.readyState==4){
+                        if(this.status==200){
+                            user = JSON.parse(this.responseText);
+                            showProfile(user);
+                        }
+                        else if(this.status==0)
+                        alert('Network error! Check your network connection and try again.');
+                        else if(this.status==404)
+                        alert('User not found');
+                        else if(this.status==500)
+                        alert('Internal Server Error. Try again later.')
+                        else if(this.status==408)
+                        alert('Request Timeout. Try again after sometime')
+                        else
+                        alert('unknown error occured');
+                    }
+                }
+
+                xhttp.open("GET",url,true,);
+                xhttp.send();
+
+                
+            }
+            function tryTrigger(event){
+                if(event.keyCode==13){
+                    showInfo();
+                }
+            }
+            function showProfile(user){
+                console.log(user);
+                document.getElementById('image').src=user.avatar_url;
+                document.getElementById('login').innerHTML=user.login+'<br>'+user.id;
+                document.getElementById('blog').innerHTML=user.blog;
+                document.getElementById('company').innerHTML=user.company;
+                document.getElementById('created-at').innerHTML=user.created_at;
+                document.getElementById('email').innerHTML=user.email;
+                document.getElementById('followers').innerHTML=user.followers;
+                document.getElementById('following').innerHTML=user.following;
+                document.getElementById('bio').innerHTML=user.bio;
+                document.getElementById('public-repos').innerHTML=user.public_repos;
+                document.getElementById('name').innerHTML=user.name;
+                document.getElementById('location').innerHTML=user.location;
+            }
+            window.onload =function (){
+                document.getElementById('search').addEventListener('click',function(){
+                showInfo();
+            });
+            }
+
+        </script>
+    </head>
+    <body>
+        <nav class="navbar navbar-dark bg-dark">
+            <div class="container-fluid">
+                <div class="navbar-header">
+                    <a class="navbar-brand"> <img src="GitHub-Mark.png" height="40px" width=40px></a>
+                    <a class="navbar-brand" href="#">GitHub</a>
+                </div>
+                <div class="navbar-form navbar-right">
+                    <div class="input-group">
+                        <input type= "text" 
+                        class= "form-control" 
+                        placeholder="search"
+                        id = "username" 
+                        onkeyup="tryTrigger(event)">
+                        <div class="input-group-append" id="search" style="cursor: pointer;">
+                            <span class="input-group-text">
+                                <i class="material-icons">search</i>   
+                            </span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </nav>
+        <div class= "container-fluid">
+            <div class= "row">
+                <div class="col-md-3">
+                    <div style="text-align: center;padding-top:10px;">
+                        <img src="GitHub-Mark.png" style="height: 200px;width:200px;margin:auto" class="card" id="image">
+                    <span id="login">GitHub-Mark</span>
+                </div>
+                </div>
+                <div class="col-md-9">
+                    <div style="margin-top:10px">
+                        <button type="button" class="btn btn-primary" style="margin-top:5px">
+                            Followers <span class="badge badge-light" id="followers">122</span>
+                        </button>
+                        <button type="button" class="btn btn-primary" style="margin-top:5px">
+                            Following <span class="badge badge-light" id="following">122</span>
+                        </button>
+                        <h4 style="margin-top:5px;">
+                            Bio
+                        </h4>
+                        <span id = "bio">Hi , I'm Mark.</span>
+                </div>
+                </div>
+            </div>
+        </div>
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-md-3">
+                    <div style="width:200px;margin:auto">
+                        <hr>
+                        <div><span style="font-weight:bold">name </span> <span id="name"></span></div>
+                        <div><span style="font-weight:bold">blog </span> <span id="blog"></span></div>
+                        <div><span style="font-weight:bold">company </span><span id="company"></span></div>
+                        <div><span style="font-weight:bold">created at </span><span id="created-at"></span></div>
+                        <div><span style="font-weight:bold">email </span><span id="email"></span></div>
+                        <div><span style="font-weight:bold">public repos </span><span id="public-repos"></span></div>
+                        <div><span style="font-weight:bold">location </span> <span id="location"></span></div>
+                    </div>
+                </div>
+                <div class="col-md-9">
+
+                </div>
+            </div>
+        </div>
+    </body>
+</html>
