@@ -67,12 +67,24 @@
 
         </script>
     </head>
+    <style>
+        .info{
+            width:200px;margin:auto
+        }
+        @media only screen and (max-width : 400px){
+            .info{
+                width:100%;
+            }
+        }
+    </style>
+       
+
     <body>
         <nav class="navbar navbar-dark bg-dark">
             <div class="container-fluid">
                 <div class="navbar-header">
                     <a class="navbar-brand"> <img src="GitHub-Mark.png" height="40px" width=40px></a>
-                    <a class="navbar-brand" href="#">GitHub</a>
+                    <a class="navbar-brand brand" href="#" >GitHub</a>
                 </div>
                 <div class="navbar-form navbar-right">
                     <div class="input-group">
@@ -117,7 +129,7 @@
         <div class="container-fluid">
             <div class="row">
                 <div class="col-md-3">
-                    <div style="width:200px;margin:auto">
+                    <div class="info">
                         <hr>
                         <div><span style="font-weight:bold">name </span> <span id="name"></span></div>
                         <div><span style="font-weight:bold">blog </span> <span id="blog"></span></div>
